@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "alchemy_domains/version"
+require "alchemy/domains/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "alchemy_domains"
-  s.version     = AlchemyDomains::VERSION
+  s.version     = Alchemy::Domains::VERSION
   s.authors     = ["Robin Böning"]
   s.email       = ["rb@magiclabs.de"]
   s.homepage    = "http://magiclabs.de"

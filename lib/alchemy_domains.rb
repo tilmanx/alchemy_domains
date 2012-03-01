@@ -1,4 +1,1 @@
-require "alchemy_domains/engine"
-
-module AlchemyDomains
-end
+require "alchemy/domains/engine"

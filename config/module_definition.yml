@@ -3,10 +3,10 @@ engine_name: alchemy_domains
 order: 1
 navigation:
   name: modules.domains
-  controller: /admin/domains
+  controller: alchemy/admin/domains
   action: index
   image: /assets/module_icon.png
   sub_navigation:
     - name: domains
-      controller: /admin/domains
+      controller: alchemy/admin/domains
       action: index
