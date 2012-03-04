@@ -1,16 +1,23 @@
-<%= form_for [alchemy_domains, :admin, @domain], :remote => true do |f| %>
+<%= form_for [:admin, @domain], :remote => true do |f| %>
 	<div id="errors" style="display: none"></div>
 	<table>
 		
 		<tr>
-			<td class="label"><%= f.send :label, :subdomain %></td>
-			<td class="input"><%= f.send :text_field, :subdomain, :class => 'thin_border' -%></td>
+			<td class="label"><%= f.label :subdomain %></td>
+			<td class="input"><%= f.text_field :subdomain, :class => 'thin_border' -%></td>
 		</tr>
 		<tr>
-			<td class="label"><%= f.send :label, :tld %></td>
-			<td class="input"><%= f.send :text_field, :tld, :class => 'thin_border' -%></td>
+			<td class="label"><%= f.label :tld %></td>
+			<td class="input"><%= f.text_field :tld, :class => 'thin_border' -%></td>
 		</tr>
-
+		<tr>
+			<td class="label"><%= f.label :languages %></td>
+			<td class="input">
+				<%= f.fields_for(:localizations, Alchemy::Localization.new) do |l| %>
+					<%= l.select(:language_id, @languages.collect{ |lang| [lang.name, lang.id] }, :class => 'thin_border') %>
+				<%- end %>
+			</td>
+		</tr>
 		<tr>
 			<td class="submit" colspan="2">
 				<%= f.button t('save'), :class => 'button' %>

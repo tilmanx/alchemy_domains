@@ -1,5 +1,5 @@
 name: domains
-engine_name: alchemy_domains
+engine_name: alchemy
 order: 1
 navigation:
   name: modules.domains

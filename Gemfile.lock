@@ -136,6 +136,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  alchemy_cms (~> 2.1.6)
   alchemy_domains!
-  jquery-rails
   sqlite3

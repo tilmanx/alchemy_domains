@@ -1,4 +1,4 @@
-Alchemy::Domains::Engine.routes.draw do
+Alchemy::Engine.routes.append do
 	namespace :admin do
 		resources :domains
 	end

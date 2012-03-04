@@ -1,0 +1,3 @@
+<%- @domains.each do |domain| %>
+	<%= domain.name %> <%= domain.localizations.map{ |l| l.language.name }.join(', ') %>
+<% end%>
