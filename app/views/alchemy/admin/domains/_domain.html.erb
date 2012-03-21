@@ -1,0 +1,30 @@
+<tr class="<%= cycle('even', 'odd') %>">
+	<td><%= domain.hostname -%></td>
+	<td></td>
+	<td></td>
+	<td class="tools">
+		<%- permitted_to?(:destroy, :alchemy_admin_domains) do -%>
+			<%= link_to_confirmation_window(
+				'',
+				t("Are you sure?"),
+				admin_domain_path(domain),
+				:title => t("Delete"),
+				:class => "icon destroy"
+			) -%>
+		<%- end -%>
+		<%- permitted_to?(:edit, :alchemy_admin_domains) do -%>
+		<%= link_to_overlay_window(
+			'',
+			edit_admin_domain_path(domain),
+			{
+				:title => t("Edit")
+			},
+			{
+				:class => "icon edit",
+				:title => t("Edit")
+			}
+		) -%>
+		<%- end -%>
+	</td>
+</tr>
+<%= render domain.localizations %>

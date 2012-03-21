@@ -12,5 +12,13 @@ module AlchemyDomains
 		initializer 'alchemy_domains.add_authorization_rules' do
 			Alchemy::AuthEngine.get_instance.load(File.join(File.dirname(__FILE__), '../..', 'config/authorization_rules.rb'))
 		end
+
+		# Loading all alchemy core extensions found in app folder.
+		config.to_prepare do
+			Dir.glob(File.join(File.dirname(__FILE__), "../../app/**/*_extension.rb")) do |e|
+				Rails.env.production? ? require(e) : load(e)
+			end
+		end
+
 	end
 end

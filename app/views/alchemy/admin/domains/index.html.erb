@@ -1,3 +1,42 @@
-<%- @domains.each do |domain| %>
-	<%= domain.name %> <%= domain.localizations.map{ |l| l.language.name }.join(', ') %>
-<% end%>
+<%- label_title = t("Create domain", :default => t('Create')) -%>
+
+<%- toolbar(
+	:buttons => [
+		{
+			:icon => 'create',
+			:label => label_title,
+			:url => new_admin_domain_path,
+			:title => label_title,
+			:overlay_options => {
+				:title => label_title
+			},
+			:if_permitted_to => [:new, :alchemy_admin_domains]
+		}
+	],
+	:search => true,
+	:search_url => admin_domains_path
+) -%>
+
+<%- if @domains.any? -%>
+<table class="list" id="domain_list">
+	<tr>
+		<th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy/domain') %></th>
+		<th><%= t('languages') %></th>
+		<th style="width: 120px; text-align: center"><%= t('default') %></th>
+		<th class="tools"></th>
+	</tr>
+
+	<%= render @domains %>
+
+</table>
+
+<%- elsif params[:query] -%>
+<p><%= t('Nothing found') %></p>
+<%- end -%>
+
+<%= render 'alchemy/admin/partials/pagination_links', :items => @domains, :scope => alchemy %>
+
+
+<%#- @domains.each do |domain| %>
+	<%#= domain.name %> <%#= domain.localizations.map{ |l| l.language.name }.join(', ') %>
+<%# end%>

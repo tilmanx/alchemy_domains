@@ -1,0 +1,30 @@
+<%= form_for [:admin, @domain], :remote => true do |f| %>
+	<div id="errors" style="display: none"></div>
+	<table>
+		
+		<tr>
+			<td class="label"><%= f.label :hostname %></td>
+			<td class="input">
+				<%= f.text_field :hostname, :class => 'thin_border' -%>
+			</td>
+		</tr>
+		<tr>
+			<td class="label"><%= f.label :languages %></td>
+			<td class="checkbox">
+				<% @domain.localizations.each_with_index do |localization, i| -%>
+				    <%= f.fields_for :localizations, localization do |l| %>  
+				        <div>
+				        	<%= l.check_box(:language_id, {:checked => !l.object.new_record?, :id => "domain_localization_#{i}"}, localization.language.id) %>
+				        	<label for="domain_localization_<%= i%>"><%= localization.language.name -%></label>
+				        </div>
+				    <% end %>
+				<% end -%>
+			</td>
+		</tr>
+		<tr>
+			<td class="submit" colspan="2">
+				<%= f.button t('save'), :class => 'button' %>
+			</td>
+		</tr>
+	</table>
+<% end %>
