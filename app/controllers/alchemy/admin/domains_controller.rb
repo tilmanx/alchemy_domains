@@ -34,7 +34,6 @@ module Alchemy
 
 			def create
 				params[:domain][:localizations_attributes].delete_if { |k, v| v[:language_id] == "0" }
-				params[:domain][:localizations_attributes].first[1][:default_for_domain] = true
 				@domain = Domain.new(params[:domain])
 				@domain.save
 				render_errors_or_redirect(

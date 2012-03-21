@@ -4,7 +4,7 @@
 module Alchemy
 	BaseController.class_eval do
 
-		before_filter :set_domain
+		prepend_before_filter :set_domain
 
 	private
 

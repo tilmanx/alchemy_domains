@@ -21,8 +21,9 @@
 <table class="list" id="domain_list">
 	<tr>
 		<th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy/domain') %></th>
+		<th><%= t('default_domain') %></th>
 		<th><%= t('languages') %></th>
-		<th style="width: 120px; text-align: center"><%= t('default') %></th>
+		<th style="width: 120px; text-align: center"><%= t('default_language') %></th>
 		<th class="tools"></th>
 	</tr>
 
@@ -35,8 +36,3 @@
 <%- end -%>
 
 <%= render 'alchemy/admin/partials/pagination_links', :items => @domains, :scope => alchemy %>
-
-
-<%#- @domains.each do |domain| %>
-	<%#= domain.name %> <%#= domain.localizations.map{ |l| l.language.name }.join(', ') %>
-<%# end%>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321172080) do
+ActiveRecord::Schema.define(:version => 20120321193457) do
 
   create_table "alchemy_attachments", :force => true do |t|
     t.string   "name"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120321172080) do
   add_index "alchemy_contents", ["element_id", "position"], :name => "index_contents_on_element_id_and_position"
 
   create_table "alchemy_domains", :force => true do |t|
+    t.boolean  "default",    :default => false
     t.string   "hostname"
     t.datetime "created_at"
     t.datetime "updated_at"

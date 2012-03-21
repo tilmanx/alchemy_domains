@@ -5,9 +5,8 @@ module Alchemy
 		accepts_nested_attributes_for :localizations, :allow_destroy => true
 
 		validates_presence_of :hostname
-		validates_format_of :hostname, :with => /^[^http:\/\/]/
-
-		scope :default, where(:default => true)
+		validates_format_of :hostname, :with => /^[a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6}/
+		validates_uniqueness_of :default
 
 		def default_localization
 			self.localizations.where(:default_for_domain => true).first
@@ -22,7 +21,11 @@ module Alchemy
 		end
 
 		def self.find_by_hostname_or_default(hostname)
-			Domain.find_by_hostname(hostname) || Domain.default || raise "No Default Domain Found!"
+			Domain.find_by_hostname(hostname) || Domain.default # || raise "No Default Domain Found!"
+		end
+
+		def self.default
+			Domain.find_by_default(true)
 		end
 
 	end

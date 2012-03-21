@@ -1,0 +1,10 @@
+de:
+  alchemy:
+    languages: Sprachen
+    default_language: "Standard Sprache"
+    default_domain: "Standard Domain"
+
+  activerecord:
+    attributes:
+     alchemy/domain:
+       hostname: Domain

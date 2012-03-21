@@ -4,6 +4,7 @@ module Alchemy
 		belongs_to :domain
 		belongs_to :language
 
+		before_create :set_to_default_for_domain, :if => proc { |m| m.domain.default_localization.blank? && self.default_for_domain == false }
 		before_save :remove_old_default, :if => proc { |m| m.default_for_domain_changed? && m != Localization.default_for_domain(domain_id) }
 
 		scope :domain_languages
@@ -13,6 +14,10 @@ module Alchemy
 		end
 
 	private
+
+		def set_to_default_for_domain
+			self.default_for_domain = true
+		end
 
 		def remove_old_default
 			localization = Localization.default_for_domain(domain_id)
