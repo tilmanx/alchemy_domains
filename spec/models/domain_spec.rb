@@ -1,18 +1,18 @@
 require "spec_helper"
 
-module Alchemy
+module AlchemyDomains
 
 	describe Domain do
 	
 		before(:all) do
 			@default_domain = Domain.create!(:hostname => "my.default.de", :default => true)
-			@default_language = Language.get_default
+			@default_language = Alchemy::Language.get_default
 			@default_localization = @default_domain.localizations.create!(:language => @default_language)
 		end
 
 		describe "#default_localization" do
 			it "should find the default localization for this domain" do
-				@language_en = Language.create!(:name => 'de-en', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
+				@language_en = Alchemy::Language.create!(:name => 'de-en', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
 				@new_default_localization = @default_domain.localizations.create!(:language => @language_en, :default_for_domain => true)
 				@default_domain.default_localization.should == @new_default_localization
 			end
@@ -20,7 +20,7 @@ module Alchemy
 
 		describe "#default_language" do
 			it "should find the default language for this domain" do
-				@language_en = Language.create!(:name => 'de-en', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
+				@language_en = Alchemy::Language.create!(:name => 'de-en', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
 				@default_domain.localizations.create!(:language => @language_en)
 				@default_domain.default_language.should == @default_language
 			end

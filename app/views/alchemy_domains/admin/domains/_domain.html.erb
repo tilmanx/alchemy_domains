@@ -4,7 +4,7 @@
 	<td></td>
 	<td></td>
 	<td class="tools">
-		<%- permitted_to?(:destroy, :alchemy_admin_domains) do -%>
+		<%- permitted_to?(:destroy, :alchemy_domains_admin_domains) do -%>
 			<%= link_to_confirmation_window(
 				'',
 				t("Are you sure?"),
@@ -13,7 +13,7 @@
 				:class => "icon destroy"
 			) -%>
 		<%- end -%>
-		<%- permitted_to?(:edit, :alchemy_admin_domains) do -%>
+		<%- permitted_to?(:edit, :alchemy_domains_admin_domains) do -%>
 		<%= link_to_overlay_window(
 			'',
 			edit_admin_domain_path(domain),

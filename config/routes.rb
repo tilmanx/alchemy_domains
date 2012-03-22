@@ -1,14 +1,7 @@
-Alchemy::Engine.routes.append do
+AlchemyDomains::Engine.routes.draw do
 	namespace :admin do
 		resources :domains
-		resources :localizations
+		resources :localizations, :only => [:update]
 	end
 end
-
-# AlchemyDomains::Engine.routes.draw do
-# 	namespace :admin do
-# 		resources :domains
-# 		resources :localizations
-# 	end
-# end
-# 	
+	

@@ -10,7 +10,7 @@
 			:overlay_options => {
 				:title => label_title
 			},
-			:if_permitted_to => [:new, :alchemy_admin_domains]
+			:if_permitted_to => [:new, :alchemy_domains_admin_domains]
 		}
 	],
 	:search => true,
@@ -20,7 +20,7 @@
 <%- if @domains.any? -%>
 <table class="list" id="domain_list">
 	<tr>
-		<th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy/domain') %></th>
+		<th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy_domains/domain') %></th>
 		<th><%= t('default_domain') %></th>
 		<th><%= t('languages') %></th>
 		<th style="width: 120px; text-align: center"><%= t('default_language') %></th>
@@ -35,4 +35,4 @@
 <p><%= t('Nothing found') %></p>
 <%- end -%>
 
-<%= render 'alchemy/admin/partials/pagination_links', :items => @domains, :scope => alchemy %>
+<%= render 'alchemy/admin/partials/pagination_links', :items => @domains, :scope => alchemy_domains %>

@@ -1,8 +1,8 @@
-module Alchemy
+module AlchemyDomains
 	class Localization < ActiveRecord::Base
-
+		set_table_name :alchemy_localizations
 		belongs_to :domain
-		belongs_to :language
+		belongs_to :language, :class_name => "Alchemy::Language"
 
 		before_create :set_to_default_for_domain, :if => proc { |m| m.domain.default_localization.blank? && self.default_for_domain == false }
 		before_save :remove_old_default, :if => proc { |m| m.default_for_domain_changed? && m != Localization.default_for_domain(domain_id) }

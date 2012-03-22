@@ -9,7 +9,7 @@ module Alchemy
 	private
 
 		def set_domain
-			session[:domain_id] ||= Domain.find_by_hostname_or_default(request.host).id
+			session[:domain_id] ||= AlchemyDomains::Domain.find_by_hostname_or_default(request.host).id
 		end
 
 		# Sets the language for rendering pages in pages controller

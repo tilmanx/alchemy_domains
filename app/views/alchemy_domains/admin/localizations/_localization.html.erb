@@ -8,7 +8,7 @@
 		<% else -%>
 		<%= link_to(
 			t('make default'),
-			alchemy.admin_localization_path(
+			admin_localization_path(
 				:id => localization.id,
 				:localization => {:default_for_domain => true}
 			),

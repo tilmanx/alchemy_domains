@@ -6,5 +6,5 @@ de:
 
   activerecord:
     attributes:
-     alchemy/domain:
+     alchemy_domains/domain:
        hostname: Domain

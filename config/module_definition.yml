@@ -1,12 +1,12 @@
 name: domains
-engine_name: alchemy
+engine_name: alchemy_domains
 order: 1
 navigation:
   name: modules.domains
-  controller: alchemy/admin/domains
+  controller: alchemy_domains/admin/domains
   action: index
   image: /assets/module_icon.png
   sub_navigation:
     - name: domains
-      controller: alchemy/admin/domains
+      controller: alchemy_domains/admin/domains
       action: index

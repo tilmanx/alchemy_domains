@@ -2,6 +2,7 @@ module AlchemyDomains
 	class Engine < Rails::Engine
 
 		engine_name "alchemy_domains"
+		isolate_namespace AlchemyDomains
 
 		# Registering module in Alchemy CMS
 		initializer 'alchemy_domains.register_as_alchemy_module' do

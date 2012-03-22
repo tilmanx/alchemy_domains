@@ -1,17 +1,17 @@
-module Alchemy
+module AlchemyDomains
 	module Admin
 		class DomainsController < Alchemy::Admin::ResourcesController
 
 			def new
 				@domain = Domain.new
-				@languages = Language.published.all
+				@languages = Alchemy::Language.published.all
 				@languages.map { |l| @domain.localizations.build(:language => l) }
 				render :layout => !request.xhr?
 			end
 
 			def edit
 				@domain = Domain.find(params[:id])
-				@languages = Language.published.all
+				@languages = Alchemy::Language.published.all
 				(@languages - @domain.languages).map { |l| @domain.localizations.build(:language => l) }
 				render :layout => !request.xhr?
 			end
