@@ -6,6 +6,10 @@ module Alchemy
 
 		prepend_before_filter :set_domain
 
+		def multi_language?
+			Language.current_domain(session[:domain_id]).published.count > 1
+		end
+
 	private
 
 		def set_domain
@@ -22,25 +26,27 @@ module Alchemy
 			end
 		end
 
+		# Sets the language from the given params
 		def set_language_from(language_code_or_id)
 			if language_code_or_id.is_a?(String) && language_code_or_id.match(/^\d+$/)
 				language_code_or_id = language_code_or_id.to_i
 			end
 			case language_code_or_id.class.name
 				when "String"
-					@language = Language.find_by_code(language_code_or_id)
+					@language = Language.current_domain(session[:domain_id]).find_by_code(language_code_or_id)
 				when "Fixnum"
 					@language = Language.find(language_code_or_id)
 			end
 			store_language_in_session(@language)
 		end
 
+		# Sets the language to the domain´s default language
 		def set_language_to_default
-			@language = Language.get_default
+			@language = AlchemyDomains::Domain.find(session[:domain_id]).default_language
 			if @language
 				store_language_in_session(@language)
 			else
-				raise "No Default Language found! Did you run `rake alchemy:db:seed` task?"
+				raise "No Default Language for requested Domain found! Did you run `rake alchemy:db:seed` task?"
 			end
 		end
 
