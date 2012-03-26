@@ -1,4 +1,4 @@
-#AlchemyDomains [![Build Status](https://secure.travis-ci.org/[magiclabs]/[alchemy_domains].png)](http://travis-ci.org/[magiclabs]/[alchemy_domains])
+#AlchemyDomains [![Build Status](https://secure.travis-ci.org/magiclabs/alchemy_domains.png?branch=master)](http://travis-ci.org/magiclabs/alchemy_domains)
 
 ### This gem extends Alchemy CMS with a Localization/Domain management.
 If your website is multilingual and the provided languages should depend on the requested (sub)domain, this gem is what you need.
