@@ -9,13 +9,13 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="label"><%= f.label :default %></td>
+			<td class="label"><%= f.label :default, t('default') %></td>
 			<td class="checkbox">
 				<%= f.check_box(:default) -%>
 			</td>
 		</tr>
 		<tr>
-			<td class="label"><%= f.label :languages %></td>
+			<td class="label"><%= f.label :languages, t('languages') %></td>
 			<td class="checkbox">
 				<% @domain.localizations.each_with_index do |localization, i| -%>
 				    <%= f.fields_for :localizations, localization do |l| %>  

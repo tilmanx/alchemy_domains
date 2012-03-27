@@ -8,7 +8,7 @@ module AlchemyDomains
 				render_errors_or_redirect(
 					@localization,
 					admin_domains_path,
-					"updated"
+					flash_notice_for_resource_action
 				)
 			end
 

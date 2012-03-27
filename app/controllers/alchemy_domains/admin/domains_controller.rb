@@ -39,7 +39,7 @@ module AlchemyDomains
 				render_errors_or_redirect(
 					@domain,
 					admin_domains_path,
-					"created"
+					flash_notice_for_resource_action
 				)
 			end
 
