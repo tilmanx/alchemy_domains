@@ -13,7 +13,13 @@ module Alchemy
 	private
 
 		def set_domain
-			session[:domain_id] ||= AlchemyDomains::Domain.find_by_hostname_or_default(request.host).id
+			@domain = AlchemyDomains::Domain.find_by_hostname(request.host)
+			if @domain
+				session[:domain_id] ||= @domain.id
+			else
+				redirect_to request.protocol + AlchemyDomains::Domain.find_by_default(true).hostname, :status => 301
+				return false
+			end
 		end
 
 		# Sets the language for rendering pages in pages controller
