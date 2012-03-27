@@ -5,7 +5,7 @@ module AlchemyDomains
 	describe "AlchemyBaseControllerExtension" do
 
 		before(:all) do
-			@domain = Domain.create!(:hostname => 'biz.example.com', :default => true)
+			@domain = Factory(:domain)
 			@language_de = Alchemy::Language.get_default
 			@language_de.update_attribute(:country_code, "de")
 			@domain.localizations.create!(:language => @language_de)
@@ -18,7 +18,7 @@ module AlchemyDomains
 			context "that exists in the database" do
 			  
 				it "should save the domain_id in the session" do
-					get 'http://biz.example.de'
+					get "http://#{@domain.hostname}"
 					@request.session[:domain_id].should == @domain.id
 				end
 
@@ -26,7 +26,7 @@ module AlchemyDomains
 					it "should save the default localization's language_id of the domain in the session" do
 						@language_en = Alchemy::Language.create!(:name => 'en-de', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
 						@domain.localizations.create!(:language => @language_en, :default_for_domain => true)
-						get 'http://biz.example.com'
+						get "http://#{@domain.hostname}"
 						@request.session[:language_id].should == @language_en.id
 					end
 				end
@@ -35,7 +35,7 @@ module AlchemyDomains
 					it "should save the language in the session" do
 						@language_en = Alchemy::Language.create!(:name => 'en-de', :language_code => 'en', :country_code => 'de', :page_layout => 'home', :frontpage_name => 'home', :public => true)
 						@domain.localizations.create!(:language => @language_en, :default_for_domain => true)
-						get 'http://biz.example.com/de-de/'
+						get "http://#{@domain.hostname}/de-de/"
 						@request.session[:language_id].should == @language_de.id
 					end
 				end
@@ -43,9 +43,9 @@ module AlchemyDomains
 			end
 
 			context "that does not exist in the database" do
-				it "should save the domain_id of the default domain in the session" do
-					get 'http://wtf.example.com'
-					@request.session[:domain_id].should == @domain.id
+				it "should redirect to the default domain " do
+					get "http://wtf.example.com"
+					response.should redirect_to "http://#{@domain.hostname}"
 				end
 			end
 

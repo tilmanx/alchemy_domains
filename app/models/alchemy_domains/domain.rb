@@ -6,7 +6,11 @@ module AlchemyDomains
 		accepts_nested_attributes_for :localizations, :allow_destroy => true
 
 		validates_presence_of :hostname
+		validates_presence_of :default, :message => "Es muss eine Standard Domain geben", :if => proc	{ |m| m.default_changed? && m.default_was == true }
 		validates_format_of :hostname, :with => /^[a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6}/
+
+		before_create :set_to_default, :if => proc { |m| Domain.default.blank? && self.default == false }
+		before_save :remove_old_default, :if => proc { |m| m.default_changed? && m != Domain.default }
 
 		def default_localization
 			self.localizations.where(:default_for_domain => true).first
@@ -26,6 +30,18 @@ module AlchemyDomains
 
 		def self.default
 			Domain.find_by_default(true)
+		end
+
+	private
+
+		def set_to_default
+			self.default = true
+		end
+
+		def remove_old_default
+			domain = Domain.default
+			return true if domain.nil?
+			domain.update_attribute(:default, false)
 		end
 
 	end
