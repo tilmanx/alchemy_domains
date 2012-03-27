@@ -5,7 +5,7 @@ navigation:
   name: modules.domains
   controller: alchemy_domains/admin/domains
   action: index
-  image: /assets/module_icon.png
+  icon: /assets/module_icon.png
   sub_navigation:
     - name: domains
       controller: alchemy_domains/admin/domains
