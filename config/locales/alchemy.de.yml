@@ -1,5 +1,11 @@
 de:
   alchemy:
+
+    "make default": "als Standard festlegen"
+
+    modules:
+      domains: "Domains"
+
     languages: Sprachen
     default_language: "Standard Sprache"
     default_domain: "Standard Domain"
