@@ -16,9 +16,14 @@ module Alchemy
 			@domain = AlchemyDomains::Domain.find_by_hostname(request.host)
 			if @domain
 				session[:domain_id] ||= @domain.id
-			else
-				redirect_to request.protocol + AlchemyDomains::Domain.find_by_default(true).hostname, :status => 301
+			elsif default_domain = AlchemyDomains::Domain.default
+				redirect_to request.protocol + default_domain.hostname, :status => 301
 				return false
+			else
+				# No Domains found. We need to create the requested.
+				@domain = AlchemyDomains::Domain.create!(:hostname => request.host)
+				@domain.localizations.create!(:language => Language.get_default)
+				session[:domain_id] = @domain.id
 			end
 		end
 
@@ -52,7 +57,7 @@ module Alchemy
 			if @language
 				store_language_in_session(@language)
 			else
-				raise "No Default Language for requested Domain found! Did you run `rake alchemy:db:seed` task?"
+				raise "No Default Language for requested Domain found! Did you run `rake alchemy_domains:add:domain` task?"
 			end
 		end
 
