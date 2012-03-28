@@ -11,10 +11,9 @@ group :test do
 end
 
 group :development do
-	gem "alchemy_cms", "~> 2.1.7"
+	gem "alchemy_cms", :git => 'git://github.com/magiclabs/alchemy_cms'
 	gem "rspec-rails", "~> 2.7"
 	gem 'guard-rspec'
-	gem 'spork', '~> 1.0.0rc2'
 	gem 'guard-spork'
 	#gem 'growl_notify'
 	if !ENV["CI"]
