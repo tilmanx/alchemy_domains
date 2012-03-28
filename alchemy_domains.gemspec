@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "This gem adds the functionality for managing domains in Alchemy CMS."
   s.description = "This gem adds domains and associats them with languages. Your website can provide certain languages depending on the requested domain."
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 3.1.3"
