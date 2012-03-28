@@ -11,7 +11,7 @@ group :test do
 end
 
 group :development do
-	gem "alchemy_cms", :git => 'git://github.com/magiclabs/alchemy_cms'
+	gem "alchemy_cms", "~> 2.1.7"
 	gem "rspec-rails", "~> 2.7"
 	gem 'guard-rspec'
 	gem 'guard-spork'
