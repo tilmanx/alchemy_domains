@@ -5,7 +5,7 @@ describe Alchemy::BaseHelper do
 	describe "#multi_language?" do
 
 		before(:all) do
-			@domain = Factory(:default_domain)
+			@domain = Factory(:domain)
 			@language_de = Alchemy::Language.get_default
 			@language_de.update_attribute(:country_code, "de")
 			@domain.localizations.create!(:language => @language_de)

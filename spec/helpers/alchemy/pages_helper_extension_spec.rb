@@ -7,7 +7,7 @@ describe Alchemy::PagesHelper do
 	describe "#language_switcher" do
 
 		before(:all) do
-			@domain = Factory(:default_domain)
+			@domain = Factory(:domain)
 			@default_language = Alchemy::Language.get_default
 			@default_language.update_attribute(:country_code, "de")
 			@domain.localizations.create!(:language => @default_language)

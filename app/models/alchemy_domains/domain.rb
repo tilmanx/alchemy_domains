@@ -6,7 +6,8 @@ module AlchemyDomains
 		accepts_nested_attributes_for :localizations, :allow_destroy => true
 
 		validates_presence_of :hostname
-		validates_presence_of :default, :message => "Es muss eine Standard Domain geben", :if => proc	{ |m| m.default_changed? && m.default_was == true }
+		validates_uniqueness_of :hostname
+		validates_presence_of :default, :message => "Es muss eine Standard Domain geben", :if => proc { |m| m.default_changed? && m.default_was == true }
 		validates_format_of :hostname, :with => /^[a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6}/
 
 		before_create :set_to_default, :if => proc { |m| Domain.default.blank? && self.default == false }
@@ -22,10 +23,6 @@ module AlchemyDomains
 
 		def default_language_name
 			default_language.name if default_language.present?
-		end
-
-		def self.find_by_hostname_or_default(hostname)
-			Domain.find_by_hostname(hostname) || Domain.default # || raise "No Default Domain Found!"
 		end
 
 		def self.default

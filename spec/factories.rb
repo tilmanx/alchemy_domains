@@ -2,10 +2,6 @@ FactoryGirl.define do
 
 	factory :domain, :class => 'AlchemyDomains::Domain' do
 		hostname 'www.example.com'
-
-		factory :default_domain do
-			default true
-		end
 	end
 
 	

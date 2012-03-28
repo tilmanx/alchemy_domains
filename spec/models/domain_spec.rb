@@ -5,7 +5,7 @@ module AlchemyDomains
 	describe Domain do
 	
 		before(:all) do
-			@default_domain = Domain.create!(:hostname => "my.default.de", :default => true)
+			@default_domain = Factory(:domain)
 			@default_language = Alchemy::Language.get_default
 			@default_localization = @default_domain.localizations.create!(:language => @default_language)
 		end
@@ -28,23 +28,36 @@ module AlchemyDomains
 
 		describe "#default" do
 			it "should find the unique default domain" do
-				@other_domain = Domain.create!(:hostname => "my.test.de")
+				@other_domain = Factory(:domain, :hostname => "test.de")
 				Domain.default.should == @default_domain
 			end
 		end
 
-		describe "#find_by_hostname_or_default" do
-			context "when passing an existing hostname" do
-				it "should find a domain " do
-					@other_domain = Domain.create!(:hostname => "my.test.de")
-					Domain.find_by_hostname_or_default("my.test.de").should == @other_domain
+		describe "before_create" do
+			describe "#set_to_default" do
+				context "when no default Domain exists" do
+					it "should be set to the default Domain" do
+					  Domain.destroy_all
+					  Factory(:domain).default.should be_true
+					end
+				end
+				context "when a default Domain already exists" do
+					it "should be set to the default Domain" do
+						@default_domain.update_attribute(:default, true)
+						Factory(:domain, :hostname => "test.de").default.should be_false
+					end
 				end
 			end
+		end
 
-			context "when passing a not existent hostname" do
-				it "should find the default domain " do
-					@other_domain = Domain.create!(:hostname => "my.test.de")
-					Domain.find_by_hostname_or_default("oh-no").should == @default_domain
+		describe "before_save" do
+			describe "#remove_old_default" do
+				context "when the current Domain object will become the default Domain" do
+					it "the current default Domain's default statuts should be removed" do
+					  @default_domain.update_attribute(:default, true)
+					  Factory(:domain, :hostname => "test.de", :default => true)
+					  @default_domain.reload; @default_domain.default.should be_false
+					end
 				end
 			end
 		end

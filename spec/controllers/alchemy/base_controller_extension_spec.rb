@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Alchemy::BaseController do
 
 	before(:all) do
-		@domain = Factory(:default_domain)
+		@domain = Factory(:domain)
 		@language_de = Alchemy::Language.get_default
 		@language_de.update_attribute(:country_code, "de")
 		@domain.localizations.create!(:language => @language_de)
