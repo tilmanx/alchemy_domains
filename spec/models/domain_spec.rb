@@ -61,6 +61,26 @@ module AlchemyDomains
 				end
 			end
 		end
+		
+		describe "validate_format_of" do
+			describe "hostname" do
+				it "should have errors on saving when hostname untypical chars are used" do
+					Factory.build(:domain, :hostname => "test+me.de").valid?.should be_false
+					Factory.build(:domain, :hostname => "test&me.de").valid?.should be_false
+					Factory.build(:domain, :hostname => "test@me.de").valid?.should be_false
+					Factory.build(:domain, :hostname => "test_me.de").valid?.should be_false
+					Factory.build(:domain, :hostname => "test.").valid?.should be_false
+				end
+				it "should be valid when using dots, word and digit chars" do
+					Factory.build(:domain, :hostname => "test.de").valid?.should be_true
+					Factory.build(:domain, :hostname => "localhost").valid?.should be_true
+					Factory.build(:domain, :hostname => "sub.domain.de").valid?.should be_true
+					Factory.build(:domain, :hostname => "sub.sub.domain.de").valid?.should be_true
+					Factory.build(:domain, :hostname => "sub-sub.domain.de").valid?.should be_true
+					Factory.build(:domain, :hostname => "sub.domain864.de").valid?.should be_true
+				end
+			end
+		end
 
 		after(:all) do
 			@default_domain.destroy
