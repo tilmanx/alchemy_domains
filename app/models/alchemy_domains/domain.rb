@@ -10,7 +10,7 @@ module AlchemyDomains
 		validates_presence_of :default, :message => "Es muss eine Standard Domain geben", :if => proc { |m| m.default_changed? && m.default_was == true }
 		# locahost is not valid, so we cant validate the format like that.
 		#validates_format_of :hostname, :with => /^[a-z\d]+([\-\.][a-z\d]+)*\.[a-z]{2,6}/
-		validates_format_of :hostname, :with => /^[a-z\d]+([\-\.][a-z\d]+)/
+		validates_format_of :hostname, :with => /^[a-z\d]+([\-\.]?+[a-z\d]+)*/
 
 		before_create :set_to_default, :if => proc { |m| Domain.default.blank? && self.default == false }
 		before_save :remove_old_default, :if => proc { |m| m.default_changed? && m != Domain.default }
