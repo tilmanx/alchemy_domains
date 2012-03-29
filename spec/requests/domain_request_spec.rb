@@ -2,7 +2,7 @@ require "spec_helper"
 
 module AlchemyDomains
 
-	describe "AlchemyBaseControllerExtension" do
+	describe "DomainRequest" do
 
 		before(:all) do
 			@domain = Factory(:domain)
@@ -43,9 +43,23 @@ module AlchemyDomains
 			end
 
 			context "that does not exist in the database" do
-				it "should redirect to the default domain " do
-					get "http://wtf.example.com"
-					response.should redirect_to "http://#{@domain.hostname}"
+				context "but there is a default domain in the database" do
+					it "should redirect to the default domain " do
+						get "http://wtf.example.com"
+						response.should redirect_to "http://#{@domain.hostname}"
+					end
+				end
+				context "and there is no default domain in the database" do
+					it "should save the requested domain to the database" do
+						AlchemyDomains::Domain.destroy_all
+						get "http://wtf.example.com"
+						AlchemyDomains::Domain.default.hostname.should == "wtf.example.com"
+					end
+					it "should save the new created domain to the session" do
+						AlchemyDomains::Domain.destroy_all
+						get "http://wtf.example.com"
+						@request.session[:domain_id].should == AlchemyDomains::Domain.default.id
+					end
 				end
 			end
 
