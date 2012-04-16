@@ -29,9 +29,9 @@ module Alchemy
 		def load_page
 			return @page if @page
 			if params[:urlname].blank?
-				@page = Page.language_root_for(Language.get_default.id)
+				@page = Page.contentpages.language_root_for(Language.get_default.id)
 			else
-				@page = Page.find_by_urlname_and_language_id(params[:urlname], session[:language_id])
+				@page = Page.contentpages.find_by_urlname_and_language_id(params[:urlname], session[:language_id])
 			end
 		end
 
