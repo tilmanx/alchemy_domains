@@ -7,6 +7,7 @@ module Alchemy
 		prepend_before_filter :set_domain
 
 		def multi_language?
+			# This will check only the current requested domain and ignores other domains.
 			Language.current_domain(session[:domain_id]).published.count > 1
 		end
 
