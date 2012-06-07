@@ -28,4 +28,4 @@
 		<%- end -%>
 	</td>
 </tr>
-<%= render domain.localizations %>
+<%= render :partial => 'alchemy_domains/admin/localizations/localization', :collection => domain.localizations %>
