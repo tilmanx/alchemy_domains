@@ -10,7 +10,7 @@ group :test do
 end
 
 group :development do
-  gem "rspec-rails", "~> 2.7"
+  gem "rspec-rails"
   gem 'guard-rspec'
   gem 'guard-spork'
   #gem 'growl_notify'
