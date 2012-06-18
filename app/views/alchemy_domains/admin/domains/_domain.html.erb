@@ -1,31 +1,31 @@
 <tr class="<%= cycle('even', 'odd') %>">
-	<td><%= domain.hostname -%></td>
-	<td style="text-align: center"><%= render_icon(true) if domain.default? %></td>
-	<td></td>
-	<td></td>
-	<td class="tools">
-		<%- permitted_to?(:destroy, :alchemy_domains_admin_domains) do -%>
-			<%= link_to_confirmation_window(
-				'',
-				t("Are you sure?"),
-				admin_domain_path(domain),
-				:title => t("Delete"),
-				:class => "icon destroy"
-			) -%>
-		<%- end -%>
-		<%- permitted_to?(:edit, :alchemy_domains_admin_domains) do -%>
-		<%= link_to_overlay_window(
-			'',
-			edit_admin_domain_path(domain),
-			{
-				:title => t("Edit")
-			},
-			{
-				:class => "icon edit",
-				:title => t("Edit")
-			}
-		) -%>
-		<%- end -%>
-	</td>
+  <td><%= domain.hostname -%></td>
+  <td style="text-align: center"><%= render_icon(true) if domain.default? %></td>
+  <td></td>
+  <td></td>
+  <td class="tools">
+    <%- permitted_to?(:destroy, :alchemy_domains_admin_domains) do -%>
+      <%= link_to_confirmation_window(
+        '',
+        t("Are you sure?"),
+        admin_domain_path(domain),
+        :title => t("Delete"),
+        :class => "icon destroy"
+      ) -%>
+    <%- end -%>
+    <%- permitted_to?(:edit, :alchemy_domains_admin_domains) do -%>
+    <%= link_to_overlay_window(
+      '',
+      edit_admin_domain_path(domain),
+      {
+        :title => t("Edit")
+      },
+      {
+        :class => "icon edit",
+        :title => t("Edit")
+      }
+    ) -%>
+    <%- end -%>
+  </td>
 </tr>
 <%= render :partial => 'alchemy_domains/admin/localizations/localization', :collection => domain.localizations %>

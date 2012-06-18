@@ -1,21 +1,21 @@
 <tr class="<%= cycle("even", "odd") %>">
-	<td></td>
-	<td></td>
-	<td><%= localization.language.name %></td>
-	<td style="text-align: center">
-		<% if localization.default_for_domain? -%>
-		<%= render_icon(true) %>
-		<% else -%>
-		<%= link_to(
-			t('make default'),
-			admin_localization_path(
-				:id => localization.id,
-				:localization => {:default_for_domain => true}
-			),
-			:method => :put,
-			:remote => true
-		) %>
-		<% end -%>
-	</td>
-	<td></td>
+  <td></td>
+  <td></td>
+  <td><%= localization.language.name %></td>
+  <td style="text-align: center">
+    <% if localization.default_for_domain? -%>
+    <%= render_icon(true) %>
+    <% else -%>
+    <%= link_to(
+      t('make default'),
+      admin_localization_path(
+        :id => localization.id,
+        :localization => {:default_for_domain => true}
+      ),
+      :method => :put,
+      :remote => true
+    ) %>
+    <% end -%>
+  </td>
+  <td></td>
 </tr>

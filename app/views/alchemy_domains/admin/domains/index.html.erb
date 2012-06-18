@@ -1,33 +1,33 @@
 <%- label_title = t("Create domain", :default => t('Create')) -%>
 
 <%- toolbar(
-	:buttons => [
-		{
-			:icon => 'create',
-			:label => label_title,
-			:url => new_admin_domain_path,
-			:title => label_title,
-			:overlay_options => {
-				:title => label_title
-			},
-			:if_permitted_to => [:new, :alchemy_domains_admin_domains]
-		}
-	],
-	:search => true,
-	:search_url => admin_domains_path
+  :buttons => [
+    {
+      :icon => 'create',
+      :label => label_title,
+      :url => new_admin_domain_path,
+      :title => label_title,
+      :overlay_options => {
+        :title => label_title
+      },
+      :if_permitted_to => [:new, :alchemy_domains_admin_domains]
+    }
+  ],
+  :search => true,
+  :search_url => admin_domains_path
 ) -%>
 
 <%- if @domains.any? -%>
 <table class="list" id="domain_list">
-	<tr>
-		<th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy_domains/domain') %></th>
-		<th style="width: 150px; text-align: center"><%= t('default_domain') %></th>
-		<th><%= t('languages') %></th>
-		<th style="width: 150px; text-align: center"><%= t('default_language') %></th>
-		<th class="tools"></th>
-	</tr>
+  <tr>
+    <th style="width: 180px"><%= ::I18n.t(:hostname, :scope => 'activerecord.attributes.alchemy_domains/domain') %></th>
+    <th style="width: 150px; text-align: center"><%= t('default_domain') %></th>
+    <th><%= t('languages') %></th>
+    <th style="width: 150px; text-align: center"><%= t('default_language') %></th>
+    <th class="tools"></th>
+  </tr>
 
-	<%= render :partial => 'domain', :collection => @domains %>
+  <%= render :partial => 'domain', :collection => @domains %>
 
 </table>
 
