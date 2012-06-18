@@ -1,6 +1,6 @@
 module AlchemyDomains
 	class Localization < ActiveRecord::Base
-		set_table_name :alchemy_localizations
+		self.table_name = "alchemy_localizations"
 		belongs_to :domain
 		belongs_to :language, :class_name => "Alchemy::Language"
 

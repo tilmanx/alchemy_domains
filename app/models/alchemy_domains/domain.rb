@@ -1,6 +1,6 @@
 module AlchemyDomains
 	class Domain < ActiveRecord::Base
-		set_table_name :alchemy_domains
+		self.table_name = "alchemy_domains"
 		has_many :localizations, :dependent => :destroy
 		has_many :languages, :through => :localizations
 		accepts_nested_attributes_for :localizations, :allow_destroy => true
